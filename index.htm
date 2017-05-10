@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Demo</title>
+<style>
+body,html,.wrap{margin:0;padding:0;}
+.wrap{width:1000px;background:#eee;margin:0 auto;text-align: center;}
+.wrap h1{padding:5em 0}
+#fixedSidebar{position:fixed;display:none;background:#eee;width:100px;height:300px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Demo</h1><h1>Demo</h1><h1>Demo</h1><h1>Demo</h1><h1>Demo</h1><h1>Demo</h1><h1>Demo</h1>
+</div>
+
+
+<ul id="fixedSidebar">
+fixedSidebar
+<a id="gotop" href="javascript:;"></a>
+</ul>
+</div>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+$(function() {
+    var elevator = $('#fixedSidebar');
+    var goTop = $('#gotop');
+    
+    goTop.click(function(){
+        $('body,html').animate({scrollTop:0},500);
+    })
+    
+    elevatorCSS();
+    elevatorScroll();
+
+    $(window).resize(function(){
+        elevatorCSS()
+    });
+
+    $(window).scroll(function(){
+        elevatorScroll();
+    })
+
+    function elevatorScroll(){
+        $(window).scrollTop() < 300 ? elevator.fadeOut(200) :elevator.fadeIn(200);
+    }
+
+    function elevatorCSS(){
+        var width = elevator.outerWidth();
+        var height = elevator.outerHeight();
+        var right = ($(window).width()- 1000 - width*2)/2 - 10;
+        var top = ($(window).height()- height)/2;
+        elevator.css({
+            right: right,
+            top : top
+        });
+    }
+});
+</script>
+</body>
+</html>
